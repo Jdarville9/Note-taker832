@@ -1,14 +1,36 @@
 const express = require('express');
+const PORT = process.env.PORT || 3001
 const app = express();
-const path = require('path');
 const { notes } = require('./db/db');
-const notesHtml = require('./public/notes.html');
-const indexhtml = require('./public/index.html');
+const fs = require('fs');
+//node API makes working with fs more predictable
+// provides utils for working with file and dir paths
+const path = require('path');
+
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
+
+
+function createNewNote(body, notesArray) {
+    const newNote = body;
+    notesArray.push(newNote)
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({ notes: notesArray}, null, 2)
+    );
+    return newNote;
+};
 
 app.get('/notes', (req, res) => {
     res.json(notes);
 });
 
-app.listen(3001, () => {
-    console.log(`API server now on port 3001!`);
+app.post('/notes', (req, res) => {
+    const newNote = createNewNote(req.body, notes)
+
+    res.json(req.body);
+});
+
+app.listen(PORT, () => {
+    console.log(`API server now on port ${PORT}!`);
 });
