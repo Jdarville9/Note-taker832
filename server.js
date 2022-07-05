@@ -1,5 +1,5 @@
 const express = require('express');
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3002
 const app = express();
 const { notes } = require('./db/db');
 const fs = require('fs');
@@ -21,14 +21,22 @@ function createNewNote(body, notesArray) {
     return newNote;
 };
 
-app.get('/notes', (req, res) => {
+app.get('api/notes', (req, res) => {
     res.json(notes);
 });
 
-app.post('/notes', (req, res) => {
+app.post('api/notes', (req, res) => {
     const newNote = createNewNote(req.body, notes)
 
     res.json(req.body);
+});
+
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 app.listen(PORT, () => {
