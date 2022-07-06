@@ -1,20 +1,9 @@
 {
   "notes": [
     {
-      "title": "Test Title",
-      "text": "Test text"
-    },
-    {
       "title": "New Note",
-      "text": "Something specific"
-    },
-    {
-      "title": "Another Note",
-      "text": "Nothing really"
-    },
-    {
-      "title": "Challenge strut",
-      "text": "Do rad stuff"
+      "text": "something",
+      "id": "0"
     }
   ]
 }
