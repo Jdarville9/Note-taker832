@@ -1,1 +1,9 @@
-[]
+{
+  "notes": [
+    {
+      "title": "Random Note",
+      "text": "Text text and more text",
+      "id": "0"
+    }
+  ]
+}
