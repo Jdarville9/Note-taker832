@@ -19,6 +19,7 @@ router.get('/notes/:id', (req, res) => {
 
 router.post('/notes', (req, res) => {
     let results = notes;
+
     req.body.id = results.length.toString();
     const note = createNewNote(req.body, notes)
 
